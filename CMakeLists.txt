@@ -38,6 +38,6 @@ add_executable(E01HelloWorldService
 	src-gen/v0/commonapi/examples/E01HelloWorldStubDefault.cpp
 	src-gen/v0/commonapi/examples/E01HelloWorldDBusDeployment.cpp
 )
-
+target_link_libraries(E01HelloWorldService CommonAPI CommonAPI-DBus dbus-1)
 install(TARGETS E01HelloWorldClient E01HelloWorldService
         RUNTIME DESTINATION bin)
