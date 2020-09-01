@@ -25,19 +25,34 @@ link_directories(
     ${COMMONAPI_SOMEIP_CMAKE_DIR}/build
     ${Boost_LIBRARY_DIR}
 )
-add_executable(E01HelloWorldClient
-	src/E01HelloWorldClient.cpp
-	src-gen/v0/commonapi/examples/E01HelloWorldDBusProxy.cpp
-	src-gen/v0/commonapi/examples/E01HelloWorldDBusDeployment.cpp
+
+add_executable(E01HelloWorldClient_DBus
+        src/E01HelloWorldClient.cpp
+        src-gen/v0/commonapi/examples/E01HelloWorldDBusProxy.cpp
+        src-gen/v0/commonapi/examples/E01HelloWorldDBusDeployment.cpp
 )
-target_link_libraries(E01HelloWorldClient CommonAPI CommonAPI-DBus dbus-1)
-add_executable(E01HelloWorldService
-	src/E01HelloWorldService.cpp
-	src/E01HelloWorldStubImpl.cpp
-	src-gen/v0/commonapi/examples/E01HelloWorldDBusStubAdapter.cpp
-	src-gen/v0/commonapi/examples/E01HelloWorldStubDefault.cpp
-	src-gen/v0/commonapi/examples/E01HelloWorldDBusDeployment.cpp
+target_link_libraries(E01HelloWorldClient_DBus CommonAPI CommonAPI-DBus dbus-1)
+add_executable(E01HelloWorldService_DBus
+        src/E01HelloWorldService.cpp
+        src/E01HelloWorldStubImpl.cpp
+        src-gen/v0/commonapi/examples/E01HelloWorldDBusStubAdapter.cpp
+        src-gen/v0/commonapi/examples/E01HelloWorldStubDefault.cpp
+        src-gen/v0/commonapi/examples/E01HelloWorldDBusDeployment.cpp
 )
-target_link_libraries(E01HelloWorldService CommonAPI CommonAPI-DBus dbus-1)
-install(TARGETS E01HelloWorldClient E01HelloWorldService
+target_link_libraries(E01HelloWorldService_DBus CommonAPI CommonAPI-DBus dbus-1)
+add_executable(E01HelloWorldClient_SomeIP
+        src/E01HelloWorldClient.cpp
+        src-gen/v0/commonapi/examples/E01HelloWorldSomeIPProxy.cpp
+        src-gen/v0/commonapi/examples/E01HelloWorldSomeIPDeployment.cpp
+)
+target_link_libraries(E01HelloWorldClient_SomeIP CommonAPI CommonAPI-SomeIP vsomeip)
+add_executable(E01HelloWorldService_SomeIP
+        src/E01HelloWorldService.cpp
+        src/E01HelloWorldStubImpl.cpp
+        src-gen/v0/commonapi/examples/E01HelloWorldSomeIPStubAdapter.cpp
+        src-gen/v0/commonapi/examples/E01HelloWorldStubDefault.cpp
+        src-gen/v0/commonapi/examples/E01HelloWorldSomeIPDeployment.cpp
+)
+target_link_libraries(E01HelloWorldService_SomeIP CommonAPI CommonAPI-SomeIP vsomeip)
+install(TARGETS E01HelloWorldClient_SomeIP E01HelloWorldService_SomeIP E01HelloWorldClient_DBus E01HelloWorldService_DBus
         RUNTIME DESTINATION bin)
