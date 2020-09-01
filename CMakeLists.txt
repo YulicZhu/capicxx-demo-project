@@ -8,6 +8,9 @@ find_package (CommonAPI-SomeIP 3.1.12 REQUIRED)
 find_package (vsomeip 2.7.0 REQUIRED)
 find_package( Boost 1.54 COMPONENTS system thread log REQUIRED )
 
+include(FindPkgConfig)
+pkg_check_modules(DBus REQUIRED dbus-1>=1.4)
+
 include_directories(
     src-gen
     ${COMMONAPI_INCLUDE_DIRS}
@@ -35,6 +38,6 @@ add_executable(E01HelloWorldService
 	src-gen/v0/commonapi/examples/E01HelloWorldStubDefault.cpp
 	src-gen/v0/commonapi/examples/E01HelloWorldDBusDeployment.cpp
 )
-target_link_libraries(E01HelloWorldService CommonAPI CommonAPI-DBus dbus-1)
 
-
+install(TARGETS E01HelloWorldClient E01HelloWorldService
+        RUNTIME DESTINATION bin)
