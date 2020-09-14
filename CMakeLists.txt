@@ -165,6 +165,6 @@ add_library (${PRJ_NAME}-someip SHARED ${PRJ_SOMEIP_LIB_SRCS})
 target_link_libraries(${PRJ_NAME}-someip CommonAPI-SomeIP)
 
 install(TARGETS ${PRJ_NAME_CLIENT} ${PRJ_NAME_SERVICE} ${PRJ_NAME}-dbus ${PRJ_NAME}-someip
-        RUNTIME DESTINATION usr/bin
-        LIBRARY DESTINATION usr/lib)
+        RUNTIME DESTINATION bin
+        LIBRARY DESTINATION lib)
 
